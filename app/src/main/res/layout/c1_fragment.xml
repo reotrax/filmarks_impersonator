@@ -1,0 +1,51 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    tools:context="com.filmarks.app.filmarks.C1_Fragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="#eee">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="15dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"/>
+
+        <ImageButton
+            android:id="@+id/filmarks"
+            android:background="@drawable/filmarks_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/fragment_title"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:background="@drawable/ic_person_add_black_48dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/btnUserSearch"
+            android:layout_marginRight="10dp"/>
+
+    </LinearLayout>
+
+    <FrameLayout android:id="@+id/c1_container"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+    </FrameLayout>
+</LinearLayout>
+

@@ -1,0 +1,42 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.0.0'
+        //classpath 'com.deploygate:gradle:0.6.2'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+//apply plugin: 'android'
+//apply plugin: 'deploygate'
+//
+//deploygate {
+//    userName = "reotrax"
+//    token = "64c773f863e5575e86acd20aa0ea7ce70c2f72db"
+//
+//    apks {
+//        release {
+//            sourceFile = file("Macintosh HD/Users/user/Pictures/APP/filmarks/app-release.apk")
+//        }
+//
+//        debug {
+//            sourceFile = file("Macintosh HD/Users/user/Pictures/APP/filmarks/app-debug.apk")
+//
+//            //Below is optional
+//            message = "test upload2 sample"
+//            visibility = "public" // default private
+//            //distributionKey = "[distribution_key]"
+//            releaseNote = "release note sample"
+//        }
+//    }
+//}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}

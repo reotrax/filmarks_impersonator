@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context="com.filmarks.app.filmarks.C3_Search_List">
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:text="映画を探す"
+        android:gravity="center_vertical|left"
+        android:textSize="12sp"
+        android:textColor="#000"
+        android:background="#ccc"
+        android:paddingLeft="8dp"/>
+
+<!--これを記述すればボタンの反応みたいなのを追加できる-->
+    <!--android:clickable="true"-->
+    <!--android:foreground="?android:attr/selectableItemBackground"-->
+
+    <ScrollView
+        android:id="@+id/scrollView5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <LinearLayout
+            android:id="@+id/c3_linearLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="32dp">
+
+           <com.filmarks.app.filmarks.ExpandableHeightListView
+                android:id="@+id/noScroll_listview_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:text="ユーザーを探す"
+                android:gravity="center_vertical|left"
+                android:textSize="12sp"
+                android:textColor="#000"
+                android:id="@+id/textView20"
+                android:background="#ccc"
+                android:paddingLeft="8dp"/>
+
+            <com.filmarks.app.filmarks.ExpandableHeightListView
+                android:id="@+id/noScroll_listview_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ddd">
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="映画が見つからない場合は、\n下のボタンでご報告ください。\n１週間前後で登録させて頂きます。"
+                android:id="@+id/textView21"
+                android:maxLines="3"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:textColor="#000"/>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="未登録映画を報告する"
+                android:id="@+id/button6"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18sp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:background="#0aa"
+                android:textColor="#fff"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
