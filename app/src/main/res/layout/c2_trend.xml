@@ -2,7 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.filmarks.app.filmarks.C2_Trend">
+             tools:context="com.filmarks.app.filmarks.fragments.C2_M">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

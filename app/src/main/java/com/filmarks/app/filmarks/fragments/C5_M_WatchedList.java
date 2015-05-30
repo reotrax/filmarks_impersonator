@@ -65,6 +65,9 @@ public class C5_M_WatchedList extends Fragment implements View.OnClickListener, 
 	private LinearLayout cardLinear;
 	private Spinner spinnerSort;
 
+	private enum Enum {GRID, LIST}
+	private Enum vison = Enum.LIST;
+
 
 	public static C5_M_WatchedList newInstance(String param1, String param2) {
 		C5_M_WatchedList fragment = new C5_M_WatchedList();

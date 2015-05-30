@@ -1,22 +1,24 @@
 package com.filmarks.app.filmarks;
 
-import android.app.ActionBar;
-import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.FrameLayout;
-import android.widget.ToggleButton;
+
+import com.filmarks.app.filmarks.fragments.C1_M;
+import com.filmarks.app.filmarks.fragments.C2_M;
+import com.filmarks.app.filmarks.fragments.C3_M;
+import com.filmarks.app.filmarks.fragments.C4_M;
+import com.filmarks.app.filmarks.fragments.C5_M_Watched_2;
 
 
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends AppCompatActivity
 							implements View.OnClickListener {
 
 	private FrameLayout container;
@@ -48,9 +50,9 @@ public class MainActivity extends ActionBarActivity
 		btnMypage.setOnClickListener(this);
 
 		// フラグメントの初期画面を設定
-		C1_Fragment c1_fragment = new C1_Fragment();
+		C1_M c1_m = new C1_M();
 		FragmentManager fm = getSupportFragmentManager();
-		fm.beginTransaction().add(R.id.container, c1_fragment).commit();
+		fm.beginTransaction().add(R.id.container, c1_m).commit();
 
 	}
 
@@ -74,7 +76,7 @@ public class MainActivity extends ActionBarActivity
 				if (select!=SELECT.FOLLOWING) {
 					Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
 					String tag = "following";
-					Fragment fragment = new C1_Fragment();
+					Fragment fragment = new C1_M();
 					ft.remove(currentFragment).replace(R.id.container, fragment, tag).commit();
 					select = SELECT.FOLLOWING;
 					fragmentTag = tag;
@@ -84,7 +86,7 @@ public class MainActivity extends ActionBarActivity
 				if (select!=SELECT.TREND) {
 					Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
 					String tag = "trend";
-					Fragment fragment = new C2_Trend();
+					Fragment fragment = new C2_M();
 					ft.replace(R.id.container, fragment, tag).commit();
 					select = SELECT.TREND;
 					fragmentTag = tag;
@@ -94,7 +96,7 @@ public class MainActivity extends ActionBarActivity
 				if (select!=SELECT.SEARCH) {
 					Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
 					String tag = "search";
-					Fragment fragment = new C3_Search();
+					Fragment fragment = new C3_M();
 					ft.replace(R.id.container, fragment, tag).commit();
 					select = SELECT.SEARCH;
 					fragmentTag = tag;
@@ -103,7 +105,7 @@ public class MainActivity extends ActionBarActivity
 			case R.id.btnNews:
 				if (select!=SELECT.NEWS) {
 					Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
-					Fragment fragment = new C4_News();
+					Fragment fragment = new C4_M();
 					String tag = "news";
 					ft.replace(R.id.container, fragment, tag).commit();
 					select = SELECT.NEWS;
@@ -114,7 +116,7 @@ public class MainActivity extends ActionBarActivity
 				if (select!=SELECT.MYPAGE) {
 
 					Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
-					Fragment fragment = new C5_Mypage_Watched();
+					Fragment fragment = new C5_M_Watched_2();
 					String tag = "mypage";
 					ft.replace(R.id.container, fragment, tag).commit();
 

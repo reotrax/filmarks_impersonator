@@ -2,7 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.filmarks.app.filmarks.C4_News">
+             tools:context="com.filmarks.app.filmarks.fragments.C4_M">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -10,9 +10,10 @@
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment"/>
 
-    <com.filmarks.app.filmarks.ExpandableHeightGridView
+    <com.filmarks.app.filmarks.definition.ExpandableHeightGridView
         android:id="@+id/exGridview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"/>
 
 </FrameLayout>

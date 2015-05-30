@@ -3,7 +3,49 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              tools:context="com.filmarks.app.filmarks.C3_Search_List">
+              tools:context="com.filmarks.app.filmarks.fragments.C3_M_List">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:focusableInTouchMode="true"
+        android:id="@+id/linearLayout3"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/c3_search_list_box"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/round_corner_green"
+                android:layout_weight="1"
+                android:hint="映画・キャスト・ユーザー検索"
+                android:maxLines="1"
+                android:minLines="1"
+                android:inputType="text"
+                android:paddingLeft="44dp"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView4"
+                android:background="@drawable/ic_search_grey600_48dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"/>
+        </FrameLayout>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView18"
@@ -14,7 +56,8 @@
         android:textSize="12sp"
         android:textColor="#000"
         android:background="#ccc"
-        android:paddingLeft="8dp"/>
+        android:paddingLeft="8dp"
+        android:layout_marginTop="8dp"/>
 
 <!--これを記述すればボタンの反応みたいなのを追加できる-->
     <!--android:clickable="true"-->
@@ -34,7 +77,7 @@
             android:layout_height="match_parent"
             android:paddingBottom="32dp">
 
-           <com.filmarks.app.filmarks.ExpandableHeightListView
+           <com.filmarks.app.filmarks.definition.ExpandableHeightListView
                 android:id="@+id/noScroll_listview_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -50,7 +93,7 @@
                 android:background="#ccc"
                 android:paddingLeft="8dp"/>
 
-            <com.filmarks.app.filmarks.ExpandableHeightListView
+            <com.filmarks.app.filmarks.definition.ExpandableHeightListView
                 android:id="@+id/noScroll_listview_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

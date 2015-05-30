@@ -3,7 +3,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              tools:context="com.filmarks.app.filmarks.C5_Mypage_Watched">
+              tools:context="com.filmarks.app.filmarks.fragments.C5_M_Watched_2">
 
     <!--ソート並び替え-->
 
@@ -66,7 +66,7 @@
         </LinearLayout>
 
         <LinearLayout
-            tools:context="com.filmarks.app.filmarks.C1_Fragment"
+            tools:context="com.filmarks.app.filmarks.fragments.C1_M"
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:orientation="vertical"

@@ -2,7 +2,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              tools:context="com.filmarks.app.filmarks.C3_Search"
+              tools:context="com.filmarks.app.filmarks.fragments.C3_M"
               android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
@@ -12,61 +12,61 @@
         android:text="検索"
         android:gravity="center_vertical|center_horizontal"
         android:textSize="20dp"
-        android:textColor="#000"/>
+        android:elevation="1dp"
+        android:textColor="#000"
+        android:background="#fff"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#aaa"/>
+    <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:paddingLeft="16dp"-->
+        <!--android:paddingRight="16dp"-->
+        <!--android:paddingTop="8dp"-->
+        <!--android:paddingBottom="8dp"-->
+        <!--android:focusableInTouchMode="true"-->
+        <!--android:id="@+id/c3_focus_layout"-->
+        <!--android:gravity="center_vertical">-->
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        <!--<FrameLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:layout_weight="1">-->
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="#0aa"
-            android:padding="1dp">
+            <!--<EditText-->
+                <!--android:id="@+id/c3_search_box"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:background="@drawable/round_corner_green"-->
+                <!--android:layout_weight="1"-->
+                <!--android:hint="映画・キャスト・ユーザー検索"-->
+                <!--android:maxLines="1"-->
+                <!--android:minLines="1"-->
+                <!--android:inputType="text"-->
+                <!--android:paddingLeft="44dp"-->
+                <!--android:textSize="14sp"/>-->
 
-            <ImageView
-                android:layout_width="38dp"
-                android:layout_height="fill_parent"
-                android:id="@+id/imageView3"/>
+            <!--<ImageView-->
+                <!--android:layout_width="25dp"-->
+                <!--android:layout_height="25dp"-->
+                <!--android:id="@+id/imageView3"-->
+                <!--android:background="@drawable/ic_search_grey600_48dp"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:layout_marginLeft="8dp"/>-->
+        <!--</FrameLayout>-->
 
-            <EditText
-                android:id="@+id/c3_search_box"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:background="#fff"
-                android:layout_weight="1"
-                android:hint="映画・キャスト・ユーザー検索"
-                android:maxLines="1"
-                android:minLines="1"
-                android:inputType="text"
-                android:paddingLeft="8dp"
-                android:textSize="12sp"/>
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:text="キャンセル"-->
+            <!--android:id="@+id/c3_btn_cancel"-->
+            <!--android:textColor="#555"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:textSize="14sp"-->
+            <!--android:paddingLeft="16dp"-->
+            <!--android:paddingRight="16dp"/>-->
 
-        </LinearLayout>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="キャンセル"
-            android:id="@+id/c3_btn_cancel"
-            android:background="#ddd"
-            android:layout_marginLeft="8dp"
-            android:textColor="#555"/>
-
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
     <FrameLayout
         android:layout_width="fill_parent"

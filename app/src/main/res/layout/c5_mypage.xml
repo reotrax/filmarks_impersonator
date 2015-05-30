@@ -1,7 +1,7 @@
 
 <!-- TODO: Update blank fragment layout -->
 <LinearLayout
-    tools:context="com.filmarks.app.filmarks.C1_Fragment"
+    tools:context="com.filmarks.app.filmarks.fragments.C1_M"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -206,5 +206,3 @@
         <!--</LinearLayout>-->
     </ScrollView>
 </LinearLayout>
-
-    <!--tools:context="com.filmarks.app.filmarks.C5_MyPage"-->

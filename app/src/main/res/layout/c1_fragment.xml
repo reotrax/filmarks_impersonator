@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
-    tools:context="com.filmarks.app.filmarks.C1_Fragment">
+    tools:context="com.filmarks.app.filmarks.fragments.C1_M">
 
     <LinearLayout
         android:id="@+id/linearLayout"

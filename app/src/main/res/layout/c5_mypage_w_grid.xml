@@ -1,13 +1,40 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.filmarks.app.filmarks.fragments.C5_Mypage_WatchedGrid">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context="com.filmarks.app.filmarks.fragments.C5_M_WatchedGrid">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="#aaa"
+        android:gravity="center_vertical"
+        android:id="@+id/linearLayout4"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/c5_spinner_grid"
+            android:layout_weight="1"
+            android:background="#fff" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/c5_layoutBtn_grid"
+            android:layout_marginLeft="8dp" />
+
+    </LinearLayout>
+
+    <com.filmarks.app.filmarks.definition.ExpandableHeightGridView
+        android:id="@+id/c5_grid_gridview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_height="match_parent" />
 
-</FrameLayout>
+</LinearLayout>

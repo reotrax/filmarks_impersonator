@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +27,15 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class C5_M_WatchedGrid extends Fragment
-		implements AdapterView.OnItemSelectedListener, View.OnClickListener, C5_Mypage_Watched_2.GridRefreshListener {
+		implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
 	private static final String ARG_PARAM1 = "param1";
 	private static final String ARG_PARAM2 = "param2";
+	private static final String ARG_PARAM9 = "param9";
 	private ArrayList<GridCard> list = new ArrayList<>();
 	private Bitmap[] bitmaps = new Bitmap[24];
 	private GridCard[] gridList = new GridCard[24];
-	private ArrayList<String> sortList = new ArrayList<String>(Arrays.asList(
+	private ArrayList<String> sortList = new ArrayList<>(Arrays.asList(
 			"投稿日時：新しい順", "投稿日時：古い順", "SCORE：高い順", "SCORE：低い順",
 			"制作年：新しい順", "制作年：古い順", "映画タイトル：昇順", "映画タイトル：降順"));
 
@@ -42,6 +44,10 @@ public class C5_M_WatchedGrid extends Fragment
 	private ExpandableHeightGridView exGridView;
 	private CustomGridAdapter grid_adapter;
 	private int refreshNumber = 0;
+	private Fragment fragment;
+
+	private enum Enum {GRID, LIST}
+	private Enum vison = Enum.GRID;
 
 
 	public static C5_M_WatchedGrid newInstance(int param1) {
@@ -52,8 +58,21 @@ public class C5_M_WatchedGrid extends Fragment
 		return fragment;
 	}
 
+
 	public C5_M_WatchedGrid() {
 		/** Required empty public constructor */
+	}
+
+	// 自作インターフェース
+	private StateBridgeListener bridgeListener;
+
+	public interface StateBridgeListener {
+		public void Bridged(int refreshNumber);
+	}
+
+	// スワイプリフレッシュに対応する自作リスナー
+	public void setListener (StateBridgeListener bridgeListener) {
+		this.bridgeListener = bridgeListener;
 	}
 
 	@Override
@@ -62,10 +81,17 @@ public class C5_M_WatchedGrid extends Fragment
 		// 画像準備
 		imageBuilder();
 
+		Fragment fragment = new C5_M_Watched_2();
+		if (fragment instanceof StateBridgeListener == false) {
+			throw new ClassCastException("fragment が StateBridgeListener を実装していません.");
+		}
+		bridgeListener = ((StateBridgeListener) fragment);
+
 		// refreshNumber 用のバンドルが有ればセット
 		Bundle args = getArguments();
 		if (args != null) {
 			refreshNumber = args.getInt(ARG_PARAM1);
+			Log.d("test/Glid", "arg2 : " + refreshNumber);
 		}
 	}
 
@@ -81,12 +107,13 @@ public class C5_M_WatchedGrid extends Fragment
 		spinnerSort = (Spinner) view.findViewById(R.id.c5_spinner_grid);
 		ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, sortList);
 		spinnerSort.setAdapter(adapter);
+		spinnerSort.setSelection(refreshNumber);
 		spinnerSort.setOnItemSelectedListener(this);
 
 		ArrayList<GridCard> arrayList = new ArrayList<GridCard>();
 		for (int i=0; i<gridList.length; i++) {
 			GridCard gc = gridList[i];
-			arrayList.add(new GridCard(gc.getTitle(),gc.getBitmap(),gc.getCommentCount(),gc.getLikeCount(),gc.getRating(),gc.getDay()));
+			arrayList.add(new GridCard(gc.getTitle(), gc.getBitmap(), gc.getCommentCount(), gc.getLikeCount(), gc.getRating(), gc.getDay()));
 		}
 		// GridLayoutを設定しなおす
 		exGridView = (ExpandableHeightGridView) view.findViewById(R.id.c5_grid_gridview);
@@ -95,7 +122,7 @@ public class C5_M_WatchedGrid extends Fragment
 		exGridView.setExpanded(true);
 		exGridView.setNumColumns(5);
 
-		spinnerSort.setSelection(refreshNumber);
+
 
 		return view;
 	}
@@ -106,61 +133,22 @@ public class C5_M_WatchedGrid extends Fragment
 		String item = (String) parent.getSelectedItem();
 		switch (item){
 			case "投稿日時：新しい順":
-				for ( int i = 0; i < gridList.length - 1; i++ ) {
-					for ( int j = gridList.length - 1; j > i; j-- ) {
-						if ( gridList[j - 1].getDay() < gridList[j].getDay() ) {
-							// 評価
-							tempGrid = gridList[j - 1];
-							gridList[j - 1] = gridList[j];
-							gridList[j] = tempGrid;
-						}
-					}
-				}
+				sortNewPost();
 				break;
 			case "投稿日時：古い順":
-				for ( int i = 0; i < gridList.length - 1; i++ ) {
-					for ( int j = gridList.length - 1; j > i; j-- ) {
-						if ( gridList[j - 1].getDay() > gridList[j].getDay() ) {
-							// 評価
-							tempGrid = gridList[j - 1];
-							gridList[j - 1] = gridList[j];
-							gridList[j] = tempGrid;
-						}
-					}
-				}
+				sortOldPost();
 				break;
 			case "SCORE：高い順":
-				// 単純交換法による並べ替え
-				for ( int i = 0; i < gridList.length - 1; i++ ) {
-					for ( int j = gridList.length - 1; j > i; j-- ) {
-						if ( gridList[j - 1].getRating() < gridList[j].getRating() ) {
-							// 評価
-							tempGrid = gridList[j - 1];
-							gridList[j - 1] = gridList[j];
-							gridList[j] = tempGrid;
-						}
-					}
-				}
+				sortHighScore();
 				break;
 			case "SCORE：低い順":
-				// 単純交換法による並べ替え
-				for ( int i = 0; i < gridList.length - 1; i++ ) {
-					for ( int j = gridList.length - 1; j > i; j-- ) {
-						if ( gridList[j - 1].getRating() > gridList[j].getRating() ) {
-							tempGrid = gridList[j - 1];
-							gridList[j - 1] = gridList[j];
-							gridList[j] = tempGrid;
-						}
-					}
-				}
+				sortLowScore();
 				break;
 			case "映画タイトル：昇順":
-				Comparator comparatorSyoujun = new strCompareAscending();
-				Arrays.sort(gridList, comparatorSyoujun);
+				sortUpTitle();
 				break;
 			case "映画タイトル：降順":
-				Comparator comparatorKoujun = new strCompareDescending();
-				Arrays.sort(gridList, comparatorKoujun);
+				sortDownTitle();
 				break;
 		}
 		// 配列をアレイリストに移す
@@ -173,29 +161,91 @@ public class C5_M_WatchedGrid extends Fragment
 		exGridView.setAdapter(grid_adapter);
 		exGridView.setExpanded(true);
 		exGridView.setNumColumns(5);
-	}
 
-	@Override
-	public void GridRefreshed() {
-		spinnerSort.setSelection(refreshNumber);
-	}
-
-	@Override
-	public void onNothingSelected(AdapterView<?> parent) {
 
 	}
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-			case R.id.c5_layoutBtn_grid:
+	private void sortDownTitle() {
+		Comparator comparatorKoujun = new strCompareDescending();
+		Arrays.sort(gridList, comparatorKoujun);
+	}
 
-				Fragment fragment = new C5_Mypage_WatchedList();
-				FragmentTransaction ft = getFragmentManager().beginTransaction();
-				ft.replace(R.id.c5_container, fragment).commit();
+	private void sortUpTitle() {
+		Comparator comparatorSyoujun = new strCompareAscending();
+		Arrays.sort(gridList, comparatorSyoujun);
+	}
 
-				break;
+	private void sortLowScore() {
+		GridCard tempGrid;
+		for ( int i = 0; i < gridList.length - 1; i++ ) {
+			for ( int j = gridList.length - 1; j > i; j-- ) {
+				if ( gridList[j - 1].getRating() > gridList[j].getRating() ) {
+					tempGrid = gridList[j - 1];
+					gridList[j - 1] = gridList[j];
+					gridList[j] = tempGrid;
+				}
+			}
 		}
+	}
+
+	private void sortHighScore() {
+		GridCard tempGrid;
+		for ( int i = 0; i < gridList.length - 1; i++ ) {
+			for ( int j = gridList.length - 1; j > i; j-- ) {
+				if ( gridList[j - 1].getRating() < gridList[j].getRating() ) {
+					tempGrid = gridList[j - 1];
+					gridList[j - 1] = gridList[j];
+					gridList[j] = tempGrid;
+				}
+			}
+		}
+	}
+
+	private void sortOldPost() {
+		GridCard tempGrid;
+		for ( int i = 0; i < gridList.length - 1; i++ ) {
+			for ( int j = gridList.length - 1; j > i; j-- ) {
+				if ( gridList[j - 1].getDay() > gridList[j].getDay() ) {
+					tempGrid = gridList[j - 1];
+					gridList[j - 1] = gridList[j];
+					gridList[j] = tempGrid;
+				}
+			}
+		}
+		bridgeListener = new StateBridgeListener() {
+			@Override
+			public void Bridged(int number) {
+				if (bridgeListener != null) {
+					refreshNumber = 1;
+					Log.v("test/Grid/Brigde", "Bridged " + refreshNumber);
+				}
+			}
+		};
+		bridgeListener.Bridged(refreshNumber);
+	}
+
+	private void sortNewPost() {
+		GridCard tempGrid;// 単純交換法による並べ替え
+		for ( int i = 0; i < gridList.length - 1; i++ ) {
+			for ( int j = gridList.length - 1; j > i; j-- ) {
+				if ( gridList[j - 1].getDay() < gridList[j].getDay() ) {
+					// 評価
+					tempGrid = gridList[j - 1];
+					gridList[j - 1] = gridList[j];
+					gridList[j] = tempGrid;
+				}
+			}
+		}
+		bridgeListener = new StateBridgeListener() {
+			@Override
+			public void Bridged(int number) {
+				if (bridgeListener != null) {
+					refreshNumber = 0;
+					Log.v("test/Grid/Brigde", "Bridged " + refreshNumber);
+				}
+			}
+		};
+		bridgeListener.Bridged(refreshNumber);
 	}
 
 	// 映画タイトルで並び替えるための定義（昇順）
@@ -245,6 +295,22 @@ public class C5_M_WatchedGrid extends Fragment
 				}
 			}
 			return answer;
+		}
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> parent) {
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+			case R.id.c5_layoutBtn_grid:
+
+				Fragment fragment = new C5_M_WatchedList();
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				ft.replace(R.id.c5_container, fragment).commit();
+				break;
 		}
 	}
 
@@ -307,6 +373,7 @@ public class C5_M_WatchedGrid extends Fragment
 	public void onDetach() {
 		super.onDetach();
 		mListener = null;
+		bridgeListener = null;
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event
