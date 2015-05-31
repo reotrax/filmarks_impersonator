@@ -1,5 +1,6 @@
 package com.filmarks.app.filmarks.fragments;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -43,7 +44,7 @@ public class C5_M_WatchedGrid extends Fragment
 	private Spinner spinnerSort;
 	private ExpandableHeightGridView exGridView;
 	private CustomGridAdapter grid_adapter;
-	private int refreshNumber = 0;
+	private static int refreshNumber = 0;
 	private Fragment fragment;
 
 	private enum Enum {GRID, LIST}
@@ -67,7 +68,7 @@ public class C5_M_WatchedGrid extends Fragment
 	private StateBridgeListener bridgeListener;
 
 	public interface StateBridgeListener {
-		public void Bridged(int refreshNumber);
+		public void Bridged(String str);
 	}
 
 	// スワイプリフレッシュに対応する自作リスナー
@@ -87,12 +88,6 @@ public class C5_M_WatchedGrid extends Fragment
 		}
 		bridgeListener = ((StateBridgeListener) fragment);
 
-		// refreshNumber 用のバンドルが有ればセット
-		Bundle args = getArguments();
-		if (args != null) {
-			refreshNumber = args.getInt(ARG_PARAM1);
-			Log.d("test/Glid", "arg2 : " + refreshNumber);
-		}
 	}
 
 	@Override
@@ -134,21 +129,35 @@ public class C5_M_WatchedGrid extends Fragment
 		switch (item){
 			case "投稿日時：新しい順":
 				sortNewPost();
+				refreshNumber = 0;
 				break;
 			case "投稿日時：古い順":
 				sortOldPost();
+				refreshNumber = 1;
 				break;
 			case "SCORE：高い順":
 				sortHighScore();
+				refreshNumber = 2;
 				break;
 			case "SCORE：低い順":
 				sortLowScore();
+				refreshNumber = 3;
+				break;
+			case "制作年：新しい順":
+				sortNewYear();
+				refreshNumber = 4;
+				break;
+			case "制作年：古い順":
+				sortOldYear();
+				refreshNumber = 5;
 				break;
 			case "映画タイトル：昇順":
 				sortUpTitle();
+				refreshNumber = 6;
 				break;
 			case "映画タイトル：降順":
 				sortDownTitle();
+				refreshNumber = 7;
 				break;
 		}
 		// 配列をアレイリストに移す
@@ -201,6 +210,33 @@ public class C5_M_WatchedGrid extends Fragment
 		}
 	}
 
+	private void sortOldYear() {
+		GridCard tempGrid;
+		for ( int i = 0; i < gridList.length - 1; i++ ) {
+			for ( int j = gridList.length - 1; j > i; j-- ) {
+				if ( gridList[j - 1].getDay() > gridList[j].getDay() ) {
+					tempGrid = gridList[j - 1];
+					gridList[j - 1] = gridList[j];
+					gridList[j] = tempGrid;
+				}
+			}
+		}
+	}
+
+	private void sortNewYear() {
+		GridCard tempGrid;// 単純交換法による並べ替え
+		for ( int i = 0; i < gridList.length - 1; i++ ) {
+			for ( int j = gridList.length - 1; j > i; j-- ) {
+				if ( gridList[j - 1].getDay() < gridList[j].getDay() ) {
+					// 評価
+					tempGrid = gridList[j - 1];
+					gridList[j - 1] = gridList[j];
+					gridList[j] = tempGrid;
+				}
+			}
+		}
+	}
+
 	private void sortOldPost() {
 		GridCard tempGrid;
 		for ( int i = 0; i < gridList.length - 1; i++ ) {
@@ -212,16 +248,6 @@ public class C5_M_WatchedGrid extends Fragment
 				}
 			}
 		}
-		bridgeListener = new StateBridgeListener() {
-			@Override
-			public void Bridged(int number) {
-				if (bridgeListener != null) {
-					refreshNumber = 1;
-					Log.v("test/Grid/Brigde", "Bridged " + refreshNumber);
-				}
-			}
-		};
-		bridgeListener.Bridged(refreshNumber);
 	}
 
 	private void sortNewPost() {
@@ -236,16 +262,6 @@ public class C5_M_WatchedGrid extends Fragment
 				}
 			}
 		}
-		bridgeListener = new StateBridgeListener() {
-			@Override
-			public void Bridged(int number) {
-				if (bridgeListener != null) {
-					refreshNumber = 0;
-					Log.v("test/Grid/Brigde", "Bridged " + refreshNumber);
-				}
-			}
-		};
-		bridgeListener.Bridged(refreshNumber);
 	}
 
 	// 映画タイトルで並び替えるための定義（昇順）
@@ -306,6 +322,8 @@ public class C5_M_WatchedGrid extends Fragment
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.c5_layoutBtn_grid:
+
+				bridgeListener.Bridged("LIST");
 
 				Fragment fragment = new C5_M_WatchedList();
 				FragmentTransaction ft = getFragmentManager().beginTransaction();

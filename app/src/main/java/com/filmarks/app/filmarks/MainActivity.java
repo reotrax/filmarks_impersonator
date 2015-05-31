@@ -15,6 +15,7 @@ import com.filmarks.app.filmarks.fragments.C1_M;
 import com.filmarks.app.filmarks.fragments.C2_M;
 import com.filmarks.app.filmarks.fragments.C3_M;
 import com.filmarks.app.filmarks.fragments.C4_M;
+import com.filmarks.app.filmarks.fragments.C5_M;
 import com.filmarks.app.filmarks.fragments.C5_M_Watched_2;
 
 
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity
 				if (select!=SELECT.MYPAGE) {
 
 					Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
-					Fragment fragment = new C5_M_Watched_2();
+					Fragment fragment = new C5_M();
 					String tag = "mypage";
 					ft.replace(R.id.container, fragment, tag).commit();
 
