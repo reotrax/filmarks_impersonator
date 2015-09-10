@@ -3,7 +3,6 @@ package com.filmarks.app.filmarks;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -29,13 +28,6 @@ import com.filmarks.app.filmarks.urlimageview.UrlImageView;
 import com.filmarks.app.filmarks.urlimageview.UrlImageView.OnImageLoadListener;
 import com.mysql.jdbc.ResultSetMetaData;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -46,7 +38,6 @@ import java.util.Random;
 
 public class AsyncActivity extends AppCompatActivity implements View.OnClickListener {
 
-	static String TAG = "Download1";
 	private TextView file_name, prog_textview;
 	private EditText editText;
 	private Button imgGet_btn, async_btn, url_get_btn, sqlGet_btn, jdbc_btn;
@@ -78,9 +69,9 @@ public class AsyncActivity extends AppCompatActivity implements View.OnClickList
 		sqlGet_btn.setOnClickListener(this);
 
 		// BroadcastREcievier
-		DownloadProgressBroadcastReceiver progressReceiver = new DownloadProgressBroadcastReceiver();
-		IntentFilter intentFilter = new IntentFilter();
-		intentFilter.addAction("DOWNLOAD_PROGRESS_ACTION");
+		//DownloadProgressBroadcastReceiver progressReceiver = new DownloadProgressBroadcastReceiver();
+		//IntentFilter intentFilter = new IntentFilter();
+		//intentFilter.addAction("DOWNLOAD_PROGRESS_ACTION");
 		//registerReceiver(progressReceiver, intentFilter);
 	}
 
@@ -315,10 +306,10 @@ public class AsyncActivity extends AppCompatActivity implements View.OnClickList
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
+//		int id = item.getItemId();
+//		if (id == R.id.action_settings) {
+//			return true;
+//		}
 
 		return super.onOptionsItemSelected(item);
 	}
