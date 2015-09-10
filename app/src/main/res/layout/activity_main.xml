@@ -5,65 +5,134 @@
               android:layout_height="match_parent"
               tools:context=".MainActivity">
 
-    <!-- Fragment -->
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1">
-    </FrameLayout>
+    <com.filmarks.app.filmarks.definition.DetectableKeyboardEventLayout
+        android:id="@+id/keyboardEvent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <!--ボタン-->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="60dp" >
+        <!-- Fragment -->
 
-        <Button
-            android:id="@+id/btnFollowing"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:text="flwng"
-            android:textColor="#ddd"
-            android:background="#000"
-            android:layout_weight="1"/>
+        <FrameLayout
+            android:id="@+id/container0"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
 
-        <Button
-            android:id="@+id/btnTrend"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:text="trnd"
-            android:textColor="#ddd"
-            android:background="#000"
-            android:layout_weight="1"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-        <Button
-            android:id="@+id/btnSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:text="search"
-            android:textColor="#ddd"
-            android:background="#000"
-            android:layout_weight="1"/>
+            <!--<android.support.v4.widget.SwipeRefreshLayout-->
+            <!--android:id="@+id/swipelayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!-->-->
 
-        <Button
-            android:id="@+id/btnNews"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:text="news"
-            android:textColor="#ddd"
-            android:background="#000"
-            android:layout_weight="1"/>
+            <!--<com.filmarks.app.filmarks.definition.MyScrollView-->
+            <!--android:id="@+id/scrollView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:fillViewport="false"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true">-->
 
-        <Button
-            android:id="@+id/btnMyPage"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:text="mypage"
-            android:textColor="#ddd"
-            android:background="#000"
-            android:layout_weight="1"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
-    </LinearLayout>
+                <FrameLayout
+                    android:id="@+id/container1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    >
+                </FrameLayout>
 
+                <!--<FrameLayout-->
+                <!--android:id="@+id/container2"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--/>-->
+
+            </LinearLayout>
+
+            <!--</com.filmarks.app.filmarks.definition.MyScrollView>>-->
+
+            <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/snackbar_main"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <LinearLayout
+            tools:context="com.filmarks.app.filmarks.fragments.Buttons"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/btn_layout">
+
+            <!--<Button-->
+            <!--android:id="@+id/activity_btn"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:text="actvt"-->
+            <!--android:textColor="#ddd"-->
+            <!--android:background="#000"-->
+            <!--android:layout_weight="1"/>-->
+
+            <Button
+                android:id="@+id/c1btn"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="flwng"
+                android:textColor="#ddd"
+                android:background="#000"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/c2btn"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="trnd"
+                android:textColor="#ddd"
+                android:background="#000"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/c3btn"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="search"
+                android:textColor="#ddd"
+                android:background="#000"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/c4btn"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="news"
+                android:textColor="#ddd"
+                android:background="#000"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/c5btn"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="mypage"
+                android:textColor="#ddd"
+                android:background="#000"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </com.filmarks.app.filmarks.definition.DetectableKeyboardEventLayout>
 </LinearLayout>

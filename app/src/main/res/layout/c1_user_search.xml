@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
-    tools:context="com.filmarks.app.filmarks.fragments.C1_M_UserSearch" >
+    tools:context="com.filmarks.app.filmarks.fragments.C1_F_UserSearch" >
 
     <FrameLayout
         android:layout_width="match_parent"

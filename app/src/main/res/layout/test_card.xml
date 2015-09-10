@@ -3,7 +3,8 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              tools:context=".SampleActivity">
+              tools:context=".SampleActivity"
+              android:background="#fff">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
@@ -13,41 +14,48 @@
         >
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:gravity="center_vertical"
             android:background="#fff">
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_marginTop="4dp">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="8dp"
+                android:clickable="true">
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    >
+                    android:gravity="center_vertical">
 
-                    <ImageView
+                    <com.filmarks.app.filmarks.urlimageview.UrlImageView
                         android:id="@+id/userImage"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_marginRight="10dp"
-                        android:layout_gravity="top"
-                        />
+                        android:layout_gravity="center_vertical"
+                        android:background="#f0f0f0"/>
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_gravity="center_vertical"
                         android:gravity="top"
                         android:layout_weight="1">
 
@@ -57,22 +65,35 @@
                             android:layout_height="wrap_content"
                             android:text="User Name"
                             android:id="@+id/userName"
-                            android:textSize="20sp"/>
+                            android:textSize="16sp"
+                            android:textColor="#000"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Review Time"
-                            android:id="@+id/upDay"/>
+                            android:id="@+id/reviewDate"
+                            android:textSize="12sp"/>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="タイトル"
+                    android:id="@+id/movie_title"
+                    android:textColor="#000"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp"
+                    android:clickable="true"/>
+
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
 
                     <RatingBar
                         android:id="@+id/ratingBar"
@@ -86,15 +107,35 @@
                         android:layout_height="wrap_content"
                         android:text="1.5"
                         android:textColor="#ffb000"
-                        android:id="@+id/rating"/>
+                        android:id="@+id/rating"
+                        android:layout_marginLeft="4dp"
+                        android:layout_gravity="center_vertical"/>
 
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:text="Comment"
-                    android:id="@+id/userComment"/>
+                    android:id="@+id/userComment"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#000"
+                    android:maxLines="10"
+                    android:ellipsize="end"
+                    android:scrollHorizontally="true"
+                    android:textSize="16sp"
+                    android:layout_marginRight="8dp"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text=">> 続きを読む"
+                    android:id="@+id/c_continue"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#3cc"
+                    android:layout_marginBottom="8dp"
+                    android:clickable="true"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -103,36 +144,89 @@
                 android:layout_height="wrap_content"
                 >
 
-                <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="75dp"
-                    android:id="@+id/btnMovieJaket"/>
+                <com.filmarks.app.filmarks.urlimageview.UrlImageButton
+                    android:id="@+id/btnUrlImage"
+                    android:layout_width="100dp"
+                    android:layout_height="141dp"/>
 
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content">
 
                     <ImageButton
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/btnWatched"/>
+                        android:layout_height="45dp"
+                        android:id="@+id/btnWatched"
+                        android:layout_weight="1"/>
 
                     <ImageButton
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/btnClip"/>
+                        android:layout_height="45dp"
+                        android:id="@+id/btnClip"
+                        android:layout_weight="1"/>
                 </LinearLayout>
             </LinearLayout>
 
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:text="いいね！　件"
+                android:id="@+id/fav_count"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:text="コメント　件"
+                android:id="@+id/c_count"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#ddd"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:paddingLeft="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="いいね！"
+                    android:id="@+id/textView"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="コメント"
+                    android:id="@+id/textView17"
+                    android:layout_marginLeft="32dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#ddd"
+                />
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#ddd">
-    </LinearLayout>
 
 </LinearLayout>

@@ -3,7 +3,7 @@
              android:orientation="vertical"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.filmarks.app.filmarks.MovieInfo"
+             tools:context="com.filmarks.app.filmarks.fragments.MovieInfo"
              android:background="#fff">
 
     <!-- TODO: Update blank fragment layout -->
@@ -113,7 +113,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/info_e_title"
+                    android:id="@+id/info_sub_title"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="English Title"
@@ -141,11 +141,22 @@
                         android:layout_weight="1"
                         android:layout_marginRight="4dp">
 
-                        <ImageView
+                        <FrameLayout
                             android:layout_width="150dp"
-                            android:layout_height="213dp"
-                            android:id="@+id/info_image"
-                            android:clickable="true"/>
+                            android:layout_height="213dp">
+
+                            <ProgressBar
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/progressBar2"
+                                android:layout_gravity="center_vertical"/>
+
+                            <ImageView
+                                android:layout_width="150dp"
+                                android:layout_height="213dp"
+                                android:id="@+id/info_image"
+                                android:clickable="true"/>
+                        </FrameLayout>
 
                         <LinearLayout
                             android:orientation="horizontal"
@@ -188,7 +199,7 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginLeft="4dp">
 
@@ -200,19 +211,12 @@
                             android:textStyle="bold"
                             android:textSize="12sp"/>
 
-                        <TextView
+                        <LinearLayout
+                            android:orientation="vertical"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:text="ピーター・ボグダノヴィッチ"
-                            android:id="@+id/info_director"
-                            android:textColor="#333"
-                            android:background="#ddd"
-                            android:layout_marginTop="4dp"
-                            android:paddingLeft="4dp"
-                            android:paddingRight="4dp"
-                            android:textSize="12sp"
-                            android:paddingTop="4dp"
-                            android:paddingBottom="4dp"/>
+                            android:layout_marginTop="8dp"
+                            android:id="@+id/directors"/>
 
                         <TextView
                             android:layout_width="fill_parent"
@@ -223,34 +227,29 @@
                             android:layout_marginTop="4dp"
                             android:textSize="12sp"/>
 
-                        <TextView
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:text="アルヴィン・サージェント"
-                            android:id="@+id/info_writer"
-                            android:background="#ddd"
-                            android:textColor="#333"
-                            android:layout_marginTop="4dp"
-                            android:paddingRight="4dp"
-                            android:paddingLeft="4dp"
-                            android:textSize="12sp"
-                            android:paddingTop="4dp"
-                            android:paddingBottom="4dp"/>
+                            android:layout_marginTop="8dp"
+                            android:id="@+id/writers"/>
 
                         <TextView
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:text="キャスト"
-                            android:id="@+id/textView11"
                             android:textStyle="bold"
                             android:layout_marginTop="4dp"
                             android:textSize="12sp"/>
 
-                        <ListView
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/listView"
-                            />
+                            android:layout_marginTop="8dp"
+                            android:id="@+id/casts">
+
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="fill_parent"
@@ -264,37 +263,76 @@
                             android:layout_height="wrap_content">
 
 
-                            <LinearLayout
-                                android:orientation="vertical"
-                                android:layout_width="fill_parent"
-                                android:layout_height="48dp"
-                                android:layout_weight="1"
-                                android:background="#da0"
-                                android:layout_marginRight="1dp"
-                                android:gravity="center_horizontal|bottom">
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Watched"
-                                    android:id="@+id/info_watched_count"/>
-                            </LinearLayout>
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="48dp"
+                                    android:layout_weight="1"
+                                    android:background="#da0"
+                                    android:layout_marginRight="1dp"
+                                    android:gravity="center_horizontal|bottom">
 
-                            <LinearLayout
-                                android:orientation="vertical"
-                                android:layout_width="fill_parent"
-                                android:layout_height="48dp"
-                                android:layout_weight="1"
-                                android:background="#da0"
-                                android:layout_marginLeft="1dp"
-                                android:gravity="center_horizontal|bottom">
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/imageView4"/>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Will"
-                                    android:id="@+id/info_wll_watch"/>
-                            </LinearLayout>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Watched"
+                                        android:id="@+id/info_watched_count"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/watched_btnLayout"
+                                    android:clickable="true">
+                                </LinearLayout>
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="48dp"
+                                    android:layout_weight="1"
+                                    android:background="#da0"
+                                    android:layout_marginLeft="1dp"
+                                    android:gravity="center_horizontal|bottom">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/imageView5"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Will"
+                                        android:id="@+id/info_wll_watch"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/want_btnLayout"
+                                    android:clickable="true">
+                                </LinearLayout>
+                            </FrameLayout>
+
                         </LinearLayout>
 
                     </LinearLayout>

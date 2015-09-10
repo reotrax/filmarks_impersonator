@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="horizontal"
+             android:layout_width="match_parent"
+             android:layout_height="60dp"
+             tools:context="com.filmarks.app.filmarks.fragments.Buttons">
+
+    <!-- TODO: Update blank fragment layout -->
+
+        <Button
+            android:id="@+id/c1_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="flwng"
+            android:textColor="#ddd"
+            android:background="#000"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/c2_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="trnd"
+            android:textColor="#ddd"
+            android:background="#000"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/c3_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="search"
+            android:textColor="#ddd"
+            android:background="#000"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/c4_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="news"
+            android:textColor="#ddd"
+            android:background="#000"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/c5_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="mypage"
+            android:textColor="#ddd"
+            android:background="#000"
+            android:layout_weight="1"/>
+</LinearLayout>

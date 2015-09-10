@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/include_header"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:text="ユーザーを探す"
+        android:gravity="center_vertical|left"
+        android:textSize="12sp"
+        android:textColor="#000"
+        android:background="#ccc"
+        android:paddingLeft="8dp"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>

@@ -2,18 +2,45 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.filmarks.app.filmarks.fragments.C4_M">
+             tools:context="com.filmarks.app.filmarks.fragments.C4_N">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="#fff"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
-    <com.filmarks.app.filmarks.definition.ExpandableHeightGridView
-        android:id="@+id/exGridview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"/>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/button"
+            android:background="#0fff"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/textView13"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Topics"
+            android:textColor="#333"
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="20sp"/>
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:background="@drawable/filmarks_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal|right"
+            android:layout_marginTop="4dp"/>
+    </FrameLayout>
 
 </FrameLayout>

@@ -5,27 +5,22 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
-    tools:context="com.filmarks.app.filmarks.fragments.C1_M">
+    tools:context="com.filmarks.app.filmarks.fragments.C1_F">
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/linearLayout"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:background="#eee">
-
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="15dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"/>
+        android:background="#fff">
 
         <ImageButton
             android:id="@+id/filmarks"
             android:background="@drawable/filmarks_logo"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"/>
 
         <TextView
             android:layout_width="fill_parent"
@@ -33,19 +28,13 @@
             android:id="@+id/fragment_title"
             android:layout_weight="1"/>
 
-        <ImageButton
-            android:background="@drawable/ic_person_add_black_48dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/btnUserSearch"
-            android:layout_marginRight="10dp"/>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/c1_scroll_btn"
+            android:background="#0fff"/>
 
-    </LinearLayout>
-
-    <FrameLayout android:id="@+id/c1_container"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent">
     </FrameLayout>
+
 </LinearLayout>
 

@@ -1,0 +1,160 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+              tools:context="com.filmarks.app.filmarks.AsyncActivity">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView2"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:text="file name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/file_name"
+                android:minLines="2"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HTTP Get"
+                    android:id="@+id/httpGet_btn"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Async Get"
+                    android:id="@+id/asyncGet_btn"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="jdbc get"
+                    android:id="@+id/jdbc_btn"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:text="progressive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/prog_textview"
+                android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="142dp"
+                    android:id="@+id/movie_image"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:background="#aaa"
+                    android:layout_marginLeft="16dp"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="UrlImageView GET"
+                        android:id="@+id/url_imageView_btn"
+                        android:layout_gravity="center_horizontal"
+                        />
+
+                    <com.filmarks.app.filmarks.urlimageview.UrlImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="#fff"
+                        android:id="@+id/url_imageView"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="さくら SQL GET"
+                android:id="@+id/sqlGet_btn"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="fromSQL"
+                android:id="@+id/fromSql"
+                android:layout_marginTop="4dp"/>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listView3"
+                android:layout_gravity="center_horizontal"
+                android:background="#fff"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:id="@+id/snackbar"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp">
+    </LinearLayout>
+
+</LinearLayout>

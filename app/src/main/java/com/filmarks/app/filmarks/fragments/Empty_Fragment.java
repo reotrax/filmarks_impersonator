@@ -1,4 +1,4 @@
-package com.filmarks.app.filmarks;
+package com.filmarks.app.filmarks.fragments;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -7,19 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
+import com.filmarks.app.filmarks.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MovieInfo.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MovieInfo#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class MovieInfo extends Fragment implements View.OnClickListener {
+public class Empty_Fragment extends Fragment {
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
@@ -37,11 +28,11 @@ public class MovieInfo extends Fragment implements View.OnClickListener {
 	 *
 	 * @param param1 Parameter 1.
 	 * @param param2 Parameter 2.
-	 * @return A new instance of fragment MovieInfo.
+	 * @return A new instance of fragment Empty_Fragment.
 	 */
 	// TODO: Rename and change types and number of parameters
-	public static MovieInfo newInstance(String param1, String param2) {
-		MovieInfo fragment = new MovieInfo();
+	public static Empty_Fragment newInstance(String param1, String param2) {
+		Empty_Fragment fragment = new Empty_Fragment();
 		Bundle args = new Bundle();
 		args.putString(ARG_PARAM1, param1);
 		args.putString(ARG_PARAM2, param2);
@@ -49,7 +40,7 @@ public class MovieInfo extends Fragment implements View.OnClickListener {
 		return fragment;
 	}
 
-	public MovieInfo() {
+	public Empty_Fragment() {
 		// Required empty public constructor
 	}
 
@@ -66,31 +57,7 @@ public class MovieInfo extends Fragment implements View.OnClickListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		View view = inflater.inflate(R.layout.movie_info, container, false);
-		// レイアウトパーツ
-		LinearLayout backBtn = (LinearLayout) view.findViewById(R.id.info_backBtn);
-		ImageButton facebook = (ImageButton) view.findViewById(R.id.info_facebook);
-		ImageButton twitter = (ImageButton) view.findViewById(R.id.info_twitter);
-		// リスナー登録
-		backBtn.setOnClickListener(this);
-		facebook.setOnClickListener(this);
-		twitter.setOnClickListener(this);
-
-		return view;
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-			case R.id.info_backBtn:
-				// バックスタックしたフラグメントに戻る
-				getFragmentManager().popBackStack();
-				break;
-			case R.id.info_facebook:
-				break;
-			case R.id.info_twitter:
-				break;
-		}
+		return inflater.inflate(R.layout.f_empty, container, false);
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event
@@ -103,12 +70,10 @@ public class MovieInfo extends Fragment implements View.OnClickListener {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-//		try {
-//			mListener = (OnFragmentInteractionListener) activity;
-//		} catch (ClassCastException e) {
-//			throw new ClassCastException(activity.toString()
-//					+ " must implement OnFragmentInteractionListener");
-//		}
+		try {
+			mListener = (OnFragmentInteractionListener) activity;
+		} catch (ClassCastException e) {
+		}
 	}
 
 	@Override

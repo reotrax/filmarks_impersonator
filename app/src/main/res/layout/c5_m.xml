@@ -1,7 +1,7 @@
 
 <!-- TODO: Update blank fragment layout -->
 <LinearLayout
-    tools:context="com.filmarks.app.filmarks.fragments.C1_M"
+    tools:context="com.filmarks.app.filmarks.fragments.C1_F"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -15,67 +15,26 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:background="#eee">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="15dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"/>
+        android:background="#fff"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="4dp"
+        android:gravity="right">
 
         <ImageButton
             android:id="@+id/imageButton"
             android:background="@drawable/filmarks_logo"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="center_vertical"/>
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/textView"
-            android:layout_weight="1"
-            android:text="マイページ"
-            android:gravity="center_vertical"
-            android:textSize="20dp"/>
+            android:layout_marginLeft="16dp"/>
 
         <ImageButton
             android:background="@drawable/ic_person_add_black_48dp"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
             android:id="@+id/imageButton2"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginLeft="16dp"/>
     </LinearLayout>
 
     <!--メイン-->
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:fillViewport="false"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <FrameLayout
-                android:id="@+id/c5_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/c5_container2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </FrameLayout>
-
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>

@@ -5,37 +5,200 @@
               android:layout_height="match_parent"
               tools:context="com.filmarks.app.filmarks.fragments.C5_M_WatchedList">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:background="#aaa"
-        android:gravity="center_vertical"
-        android:id="@+id/linearLayout4"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/c5_spinner_list"
-            android:layout_weight="1"
-            android:background="#fff"
-            android:layout_marginLeft="16dp"/>
-
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/c5_layoutBtn_list"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/c5_list_ll"
-        android:orientation="vertical"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipelayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        >
+
+        <com.filmarks.app.filmarks.definition.MyScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:fillViewport="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:id="@+id/linearLayout3"
+                    >
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            tools:context="com.filmarks.app.filmarks.fragments.C1_F"
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#fff">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/linearLayout5">
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginRight="16dp">
+
+                                    <ImageButton
+                                        android:layout_width="48dp"
+                                        android:layout_height="48dp"
+                                        android:id="@+id/imageButton13"
+                                        android:background="@drawable/filmarks_logo"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:text="New Text"
+                                        android:id="@+id/textView18"
+                                        android:layout_gravity="top"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="New Text"
+                                        android:id="@+id/textView20"
+                                        android:layout_weight="1"/>
+
+                                    <Button
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="New Button"
+                                        android:id="@+id/button7"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="8dp">
+
+                                    <Button
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:text="followers"
+                                        android:id="@+id/button8"
+                                        android:layout_weight="1"/>
+
+                                    <Button
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:text="following"
+                                        android:id="@+id/button9"
+                                        android:layout_weight="1"/>
+
+                                    <ImageButton
+                                        android:id="@+id/imageButton14"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_weight="1"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <ImageButton
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="48dp"
+                                        android:id="@+id/imageButton15"
+                                        android:layout_weight="1"
+                                        android:background="#FEE101"/>
+
+                                    <ImageButton
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="48dp"
+                                        android:id="@+id/imageButton16"
+                                        android:layout_weight="1"
+                                        android:background="#FFF198"/>
+
+                                    <ImageButton
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="48dp"
+                                        android:id="@+id/imageButton17"
+                                        android:layout_weight="1"
+                                        android:background="#FDBC7A"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="48dp"
+                        android:background="#aaa"
+                        android:gravity="center_vertical"
+                        android:id="@+id/linearLayout4"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp">
+
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/c5_spinner_list"
+                            android:layout_weight="1"
+                            android:background="#fff"
+                            />
+
+                        <ImageButton
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:id="@+id/c5_layoutBtn_list"
+                            android:layout_marginLeft="8dp"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/c5_list_ll"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="96dp"
+                        android:background="#aaa"
+                        android:gravity="center_vertical|center_horizontal">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="次を読み込む"
+                            android:id="@+id/button5"
+                            android:background="#0000"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </com.filmarks.app.filmarks.definition.MyScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

@@ -1,0 +1,170 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.filmarks.app.filmarks.activity.Review_Activity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="8dp"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="レビュー"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical|center_horizontal"
+                />
+
+            <ImageButton
+                android:id="@+id/closeBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_close_black_36dp"
+                android:background="#0000"
+                android:scaleType="fitCenter"
+                android:padding="4dp"
+                android:layout_gravity="center_vertical"/>
+
+            <Button
+                android:id="@+id/saveBtn"
+                android:layout_width="64dp"
+                android:layout_height="40dp"
+                android:text="保存"
+                android:background="@drawable/z_green_btn"
+                android:layout_gravity="right"
+                android:textColor="#eee"/>
+        </FrameLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:background="#666"
+        android:paddingLeft="16dp"
+        android:paddingRight="8dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center_vertical|center_horizontal">
+
+            <TextView
+                android:text="スコア"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#f0f0f0"
+                android:textSize="8sp"/>
+
+            <TextView
+                android:text="-"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/score"
+                android:textColor="#fd0"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/seekBar"
+            android:layout_marginLeft="8dp"
+            android:max="50"
+            android:indeterminate="false"
+            android:progress="0"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:background="#888"
+            android:gravity="center_horizontal"
+            android:paddingTop="8dp">
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/netabareBtn"
+                android:checked="false"
+                android:text="ネタバレ"/>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switch_facebook"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switch_twitter"
+                android:checked="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:id="@+id/reviewLayout"
+                android:background="@drawable/z_bottomline"
+                >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_review"
+                    android:background="#0fff"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"/>
+            </LinearLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:id="@+id/edit_tag"
+                android:hint="#タグを入力"
+                android:layout_gravity="top"
+                android:maxLines="1"
+                android:background="#0fff"
+                android:layout_marginLeft="8dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

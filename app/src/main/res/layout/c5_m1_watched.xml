@@ -66,7 +66,7 @@
         </LinearLayout>
 
         <LinearLayout
-            tools:context="com.filmarks.app.filmarks.fragments.C1_M"
+            tools:context="com.filmarks.app.filmarks.fragments.C1_F"
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:orientation="vertical"

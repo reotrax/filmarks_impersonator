@@ -3,55 +3,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              tools:context="com.filmarks.app.filmarks.fragments.C3_M_Keyword">
-
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:focusableInTouchMode="true"
-        android:id="@+id/c3_focus_layout"
-        android:gravity="center_vertical"
-        android:layout_marginTop="8dp"
-        >
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="キャンセル"
-            android:id="@+id/c3_btn_cancel"
-            android:textColor="#555"
-            android:layout_marginLeft="8dp"
-            android:textSize="14sp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:layout_gravity="center_vertical|right"/>
-
-        <EditText
-            android:id="@+id/c3_search_key_box"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/round_corner_green"
-            android:layout_weight="1"
-            android:hint="映画・キャスト・ユーザー検索"
-            android:maxLines="1"
-            android:minLines="1"
-            android:inputType="text"
-            android:paddingLeft="44dp"
-            android:textSize="14sp"/>
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:id="@+id/imageView3"
-            android:background="@drawable/ic_search_grey600_48dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="8dp"/>
-
-    </FrameLayout>
+              tools:context="com.filmarks.app.filmarks.fragments.C3_S_Keyword">
 
     <ScrollView
         android:id="@+id/scrollView6"
@@ -65,7 +17,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+            android:paddingRight="16dp"
+            android:background="#fff">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -98,7 +51,7 @@
             </LinearLayout>
 
             <com.filmarks.app.filmarks.definition.ExpandableHeightListView
-                android:id="@+id/c3_k_listView"
+                android:id="@+id/listContents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

@@ -1,0 +1,82 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.filmarks.app.filmarks.definition.MyScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:fillViewport="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    >
+
+                    <!--<com.filmarks.app.filmarks.definition.MyScrollView-->
+                    <!--android:id="@+id/scrollView"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:fillViewport="false"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true">-->
+
+                    <!--<ScrollView-->
+                    <!--android:id="@+id/scrollView"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:fillViewport="false"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true">-->
+
+                    <LinearLayout
+                        android:id="@+id/cardLinear"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        >
+                    </LinearLayout>
+
+                    <!--</ScrollView>-->
+                    <!--</com.filmarks.app.filmarks.definition.MyScrollView>-->
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp"
+                    android:background="#aaa"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="次を読み込む"
+                        android:id="@+id/listLoad_btn"
+                        android:background="#0000"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.filmarks.app.filmarks.definition.MyScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

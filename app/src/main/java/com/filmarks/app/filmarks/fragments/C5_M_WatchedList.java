@@ -2,14 +2,11 @@ package com.filmarks.app.filmarks.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.transition.Slide;
 import android.transition.TransitionSet;
@@ -28,9 +25,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.filmarks.app.filmarks.MovieInfo;
 import com.filmarks.app.filmarks.R;
 import com.filmarks.app.filmarks.definition.GridCard;
+import com.filmarks.app.filmarks.urlimageview.UrlImageButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,22 +61,60 @@ public class C5_M_WatchedList extends Fragment implements View.OnClickListener, 
 	private LinearLayout linearLayout;
 	private LinearLayout cardLinear;
 	private Spinner spinnerSort;
+	private static int refreshNumber = 0;
+	private int gridCount = 3;
 
 	private enum Enum {GRID, LIST}
 	private Enum vison = Enum.LIST;
 
 
-	public static C5_M_WatchedList newInstance(String param1, String param2) {
+	public static C5_M_WatchedList newInstance(int param1, int refreshNumber) {
 		C5_M_WatchedList fragment = new C5_M_WatchedList();
 		Bundle args = new Bundle();
-		args.putString(ARG_PARAM1, param1);
-		args.putString(ARG_PARAM2, param2);
+		args.putInt(ARG_PARAM1, param1);
+		args.putInt(ARG_PARAM2, refreshNumber);
 		fragment.setArguments(args);
 		return fragment;
 	}
 
 	public C5_M_WatchedList() {
-		// Required empty public constructor
+		/** Required empty public constructor */
+	}
+
+	// 自作インターフェース
+	// 1,interface---2,引数---3,引数=(interface)activity---4,interface.method()で実行
+	private FragmentListListener stateLisntener;
+	public interface FragmentListListener {
+		public void FragmentListListener(String layout, int refreshNumber);
+	}
+
+	// 自作インターフェース
+	private StateBridgeListener bridgeListener;
+	public interface StateBridgeListener {
+		public void BridgedForList(String str, int number);
+	}
+
+
+	// スワイプリフレッシュに対応する自作リスナー
+	public void setListener (StateBridgeListener bridgeListener) {
+		this.bridgeListener = bridgeListener;
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+
+		imageBuilder();
+
+		bridgeListener = (StateBridgeListener) activity;
+		stateLisntener = (FragmentListListener) activity;
+
+		// グリッド数用の引数を取得
+		Bundle arg = getArguments();
+		if (arg != null) {
+			gridCount = arg.getInt(ARG_PARAM1);
+			refreshNumber = arg.getInt(ARG_PARAM2);
+		}
 	}
 
 	@Override
@@ -99,21 +134,23 @@ public class C5_M_WatchedList extends Fragment implements View.OnClickListener, 
 		ImageButton list_change_btn = (ImageButton)view.findViewById(R.id.c5_layoutBtn_list);
 		list_change_btn.setOnClickListener(this);
 
+		// ListView
+//		ArrayList<GridCard> arrayList = new ArrayList<GridCard>();
+//		for (int i=0; i<gridList.length; i++) {
+//			GridCard gc = gridList[i];
+//			arrayList.add(new GridCard(gc.getTitle(),gc.getBitmap(),gc.getCommentCount(),gc.getLikeCount(),gc.getRating(),gc.getDay()));
+//		}
+
 		//ソートの種類を切り替えるSpinner
 		spinnerSort = (Spinner) view.findViewById(R.id.c5_spinner_list);
 		ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, sortList);
 		spinnerSort.setAdapter(adapter);
+		spinnerSort.setSelection(refreshNumber);
 		spinnerSort.setOnItemSelectedListener(this);
-
-		ArrayList<GridCard> arrayList = new ArrayList<GridCard>();
-		for (int i=0; i<gridList.length; i++) {
-			GridCard gc = gridList[i];
-			arrayList.add(new GridCard(gc.getTitle(),gc.getBitmap(),gc.getCommentCount(),gc.getLikeCount(),gc.getRating(),gc.getDay()));
-		}
 
 		cardLinear = (LinearLayout) view.findViewById(R.id.c5_list_ll);
 		cardLinear.removeAllViews();
-		createCardView();
+//		createCardView();
 
 		return view;
 	}
@@ -124,68 +161,35 @@ public class C5_M_WatchedList extends Fragment implements View.OnClickListener, 
 		String item = (String) parent.getSelectedItem();
 		switch (item){
 			case "投稿日時：新しい順":
-				for ( int i = 0; i < gridList.length - 1; i++ ) {
-					for ( int j = gridList.length - 1; j > i; j-- ) {
-						if ( gridList[j - 1].getDay() < gridList[j].getDay() ) {
-							// 評価
-							tempGrid = gridList[j - 1];
-							gridList[j - 1] = gridList[j];
-							gridList[j] = tempGrid;
-						}
-					}
-				}
+				refreshNumber = 0;
 				break;
 			case "投稿日時：古い順":
-				for ( int i = 0; i < gridList.length - 1; i++ ) {
-					for ( int j = gridList.length - 1; j > i; j-- ) {
-						if ( gridList[j - 1].getDay() > gridList[j].getDay() ) {
-							// 評価
-							tempGrid = gridList[j - 1];
-							gridList[j - 1] = gridList[j];
-							gridList[j] = tempGrid;
-						}
-					}
-				}
+				refreshNumber = 1;
 				break;
 			case "SCORE：高い順":
-				// 単純交換法による並べ替え
-				for ( int i = 0; i < gridList.length - 1; i++ ) {
-					for ( int j = gridList.length - 1; j > i; j-- ) {
-						if ( gridList[j - 1].getRating() < gridList[j].getRating() ) {
-							// 評価
-							tempGrid = gridList[j - 1];
-							gridList[j - 1] = gridList[j];
-							gridList[j] = tempGrid;
-						}
-					}
-				}
+				refreshNumber = 2;
 				break;
 			case "SCORE：低い順":
-				// 単純交換法による並べ替え
-				for ( int i = 0; i < gridList.length - 1; i++ ) {
-					for ( int j = gridList.length - 1; j > i; j-- ) {
-						if ( gridList[j - 1].getRating() > gridList[j].getRating() ) {
-							tempGrid = gridList[j - 1];
-							gridList[j - 1] = gridList[j];
-							gridList[j] = tempGrid;
-						}
-					}
-				}
+				refreshNumber = 3;
+				break;
+			case "制作年：新しい順":
+				refreshNumber = 4;
+				break;
+			case "制作年：古い順":
+				refreshNumber = 5;
 				break;
 			case "映画タイトル：昇順":
-				Comparator comparatorSyoujun = new strCompareAscending();
-				Arrays.sort(gridList, comparatorSyoujun);
+				refreshNumber = 6;
 				break;
 			case "映画タイトル：降順":
-				Comparator comparatorKoujun = new strCompareDescending();
-				Arrays.sort(gridList, comparatorKoujun);
+				refreshNumber = 7;
 				break;
 		}
 		// 配列をアレイリストに移す
 		ArrayList<GridCard> arrayList = new ArrayList<GridCard>();
 		for (int i=0; i<gridList.length; i++) {
 			GridCard gc = gridList[i];
-			arrayList.add(new GridCard(gc.getTitle(),gc.getBitmap(),gc.getCommentCount(),gc.getLikeCount(),gc.getRating(),gc.getDay()));
+//			arrayList.add(new GridCard(gc.getTitle(),gc.getBitmap(),gc.getCommentCount(),gc.getLikeCount(),gc.getRating(),gc.getDay()));
 		}
 
 		// カードビュー再構成
@@ -210,11 +214,9 @@ public class C5_M_WatchedList extends Fragment implements View.OnClickListener, 
 			linearLayout = (LinearLayout) inflater1.inflate(R.layout.test_card, null);
 
 			cardView = (CardView) linearLayout.findViewById(R.id.cardView);
-			ImageButton btnMovieJacket = (ImageButton) linearLayout.findViewById(R.id.btnMovieJaket);
+			UrlImageButton btnMovieJacket = (UrlImageButton) linearLayout.findViewById(R.id.btnUrlImage);
 			int width = btnMovieJacket.getLayoutParams().width;
 			int height = btnMovieJacket.getLayoutParams().height;
-			Bitmap bitmap = Bitmap.createScaledBitmap(gridList[i].getBitmap(), width, height, false);
-			btnMovieJacket.setImageBitmap(bitmap);
 
 			btnMovieJacket.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -228,23 +230,24 @@ public class C5_M_WatchedList extends Fragment implements View.OnClickListener, 
 						set.addTransition(new Slide(Gravity.RIGHT));
 						fragment.setEnterTransition(set);
 					}
-					// 画面遷移
-					FragmentTransaction ft = getFragmentManager().beginTransaction();
-					ft.addToBackStack(null);
-					ft.replace(R.id.c1_container, fragment).commit();
 				}
 			});
 
 			ImageView user_icon = (ImageView) linearLayout.findViewById(R.id.userImage);
+
+			// 画像取得の非同期処理
+//			Bitmap bitmap = Bitmap.createScaledBitmap(gridList[i].getBitmap(), width, height, false);
+//			btnMovieJacket.setImageBitmap(bitmap);
+//			user_icon.setImageBitmap(gridList[i].getBitmap());
+
 			TextView title = (TextView) linearLayout.findViewById(R.id.userName);
 			RatingBar ratingBar = (RatingBar) linearLayout.findViewById(R.id.ratingBar);
 			TextView rating = (TextView) linearLayout.findViewById(R.id.rating);
 			TextView comment = (TextView) linearLayout.findViewById(R.id.userComment);
 
-			user_icon.setImageBitmap(gridList[i].getBitmap());
-			title.setText(gridList[i].getTitle());
-			ratingBar.setRating(gridList[i].getRating());
-			rating.setText(Float.toString(gridList[i].getRating()));
+//			title.setText(gridList[i].getTitle());
+//			ratingBar.setRating(gridList[i].getRating());
+//			rating.setText(Float.toString(gridList[i].getRating()));
 
 			cardView.setTag(i);
 
@@ -258,10 +261,11 @@ public class C5_M_WatchedList extends Fragment implements View.OnClickListener, 
 		switch (v.getId()) {
 			case R.id.c5_layoutBtn_list:
 
-				Fragment fragment = new C5_M_WatchedGrid();
-				FragmentTransaction ft = getFragmentManager().beginTransaction();
-				ft.replace(R.id.c5_container, fragment).commit();
+				stateLisntener.FragmentListListener("LIST", refreshNumber);
 
+//				bridgeListener.BridgedForList("GRID", refreshNumber);
+//				Fragment fragment = new C5_M_WatchedGrid().newInstance(gridCount,null);
+//				getFragmentManager().beginTransaction().replace(R.id.container2, fragment).commit();
 				break;
 
 		}
@@ -275,17 +279,9 @@ public class C5_M_WatchedList extends Fragment implements View.OnClickListener, 
 	}
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-
-		imageBuilder();
-
-	}
-
-	@Override
 	public void onDetach() {
 		super.onDetach();
-		mListener = null;
+		bridgeListener = null;
 	}
 
 	/**
@@ -355,57 +351,11 @@ public class C5_M_WatchedList extends Fragment implements View.OnClickListener, 
 
 	public void imageBuilder() {
 		// 画像をRGB_565に落としてから読み込んで軽くする
-		Resources res = getResources();
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inPreferredConfig = Bitmap.Config.RGB_565;
-		bitmaps[0] = BitmapFactory.decodeResource(res, R.drawable.movie_the_italian_jop, options);
-		bitmaps[1] = BitmapFactory.decodeResource(res, R.drawable.movie_steve_jobs, options);
-		bitmaps[2] = BitmapFactory.decodeResource(res, R.drawable.movie_shonen_merikensack, options);
-		bitmaps[3] = BitmapFactory.decodeResource(res, R.drawable.movie_hatsukoi, options);
-		bitmaps[4] = BitmapFactory.decodeResource(res, R.drawable.movie_himizu, options);
-		bitmaps[5] = BitmapFactory.decodeResource(res, R.drawable.movie_merry_christmas_mr_lawrence, options);
-		bitmaps[6] = BitmapFactory.decodeResource(res, R.drawable.movie_climers_high, options);
-		bitmaps[7] = BitmapFactory.decodeResource(res, R.drawable.movie_almost_famous, options);
-		bitmaps[8] = BitmapFactory.decodeResource(res, R.drawable.movie_robocon, options);
-		bitmaps[9] = BitmapFactory.decodeResource(res, R.drawable.movie_the_fan, options);
-		bitmaps[10] = BitmapFactory.decodeResource(res, R.drawable.movie_tantei_monogatari, options);
-		bitmaps[11] = BitmapFactory.decodeResource(res, R.drawable.movie_yaju_shisubeshi, options);
-		bitmaps[12] = BitmapFactory.decodeResource(res, R.drawable.movie_pai, options);
-		bitmaps[13] = BitmapFactory.decodeResource(res, R.drawable.movie_doctor_parnassus, options);
-		bitmaps[14] = BitmapFactory.decodeResource(res, R.drawable.movie_reality_bites, options);
-		bitmaps[15] = BitmapFactory.decodeResource(res, R.drawable.movie_oh_brother, options);
-		bitmaps[16] = BitmapFactory.decodeResource(res, R.drawable.movie_myrage_mylife, options);
-		bitmaps[17] = BitmapFactory.decodeResource(res, R.drawable.movie_the_iron_mask, options);
-		bitmaps[18] = BitmapFactory.decodeResource(res, R.drawable.movie_catch_me_if_you_can, options);
-		bitmaps[19] = BitmapFactory.decodeResource(res, R.drawable.movie_blood_diamond, options);
-		bitmaps[20] = BitmapFactory.decodeResource(res, R.drawable.movie_ghost_rider, options);
-		bitmaps[21] = BitmapFactory.decodeResource(res, R.drawable.movie_biohazard3, options);
-		bitmaps[22] = BitmapFactory.decodeResource(res, R.drawable.movie_john_q, options);
-		bitmaps[23] = BitmapFactory.decodeResource(res, R.drawable.movie_wild_wild_west, options);
-		gridList[0] = new GridCard("ミニミニ大作戦", bitmaps[0], 0, 0, 4.0f, 23);
-		gridList[1] = new GridCard("スティーブ・ジョブズ", bitmaps[1], 0, 1, 1.5f, 22);
-		gridList[2] = new GridCard("少年メリケンサック", bitmaps[2], 0, 0, 4.0f, 21);
-		gridList[3] = new GridCard("初恋", bitmaps[3], 0, 0, 3.8f, 20);
-		gridList[4] = new GridCard("ヒミズ", bitmaps[4], 0, 0, 3.8f, 19);
-		gridList[5] = new GridCard("戦場のメリークリスマス", bitmaps[5], 0, 0, 4.5f, 18);
-		gridList[6] = new GridCard("クライマーズ・ハイ", bitmaps[6], 0, 0, 4.2f, 17);
-		gridList[7] = new GridCard("あの頃ペニーレインと", bitmaps[7], 0, 0, 0, 16);
-		gridList[8] = new GridCard("ロボコン", bitmaps[8], 0, 0, 3.7f, 15);
-		gridList[9] = new GridCard("The Fan", bitmaps[9], 0, 0, 3.9f, 14);
-		gridList[10] = new GridCard("探偵物語", bitmaps[10], 0, 0, 0, 13);
-		gridList[11] = new GridCard("野獣死すべし", bitmaps[11], 0, 0, 4.3f, 12);
-		gridList[12] = new GridCard("π", bitmaps[12], 0, 0, 0, 11);
-		gridList[13] = new GridCard("Dr.パルナサスの鏡", bitmaps[13], 0, 0, 0, 10);
-		gridList[14] = new GridCard("Reality Bites", bitmaps[14], 0, 0, 3.3f, 9);
-		gridList[15] = new GridCard("オー・ブラザー！", bitmaps[15], 0, 0, 3.8f, 8);
-		gridList[16] = new GridCard("マイレージ、マイライフ", bitmaps[16], 0, 0, 3.5f, 7);
-		gridList[17] = new GridCard("仮面の男", bitmaps[17], 0, 0, 0, 6);
-		gridList[18] = new GridCard("Catch Me If You Can", bitmaps[18], 0, 0, 0, 5);
-		gridList[19] = new GridCard("Blood Diamond", bitmaps[19], 0, 0, 0, 4);
-		gridList[20] = new GridCard("Ghost Rider", bitmaps[20], 2, 0, 2.4f, 3);
-		gridList[21] = new GridCard("バイオハザード３", bitmaps[21], 0, 0, 2.0f, 2);
-		gridList[22] = new GridCard("ジョンQ", bitmaps[22], 0, 0, 4.0f, 1);
-		gridList[23] = new GridCard("Wild Wild West", bitmaps[23], 0, 0, 2.5f, 0);
+//		Resources res = getResources();
+//		BitmapFactory.Options options = new BitmapFactory.Options();
+//		options.inPreferredConfig = Bitmap.Config.RGB_565;
+//		bitmaps[0] = BitmapFactory.decodeResource(res, R.drawable.movie_the_italian_job, options);
+//		gridList[0] = new GridCard("ミニミニ大作戦", bitmaps[0], 0, 0, 4.0f, 23);
 	}
 
 	@Override
@@ -417,8 +367,8 @@ public class C5_M_WatchedList extends Fragment implements View.OnClickListener, 
 		Log.v("test/C5", "recycle");
 		for (int i=0; i<bitmaps.length; i++) {
 			//if (bitmaps[i]!=null) {
-			bitmaps[i].recycle();
-			bitmaps[i] = null;
+//			bitmaps[i].recycle();
+//			bitmaps[i] = null;
 			//}
 		}
 	}
